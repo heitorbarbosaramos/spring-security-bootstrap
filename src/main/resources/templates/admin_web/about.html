@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/main}">
+
+<div layout:fragment="content" class="container-fluid">
+
+	<!-- Page Heading -->
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+		<h1 class="h3 mb-0 text-gray-800">About Us</h1>
+		
+		
+	</div>
+	 <h2>Welcome</h2>
+        <p>Spring Security Thymeleaf tutorial</p>
+        <div sec:authorize="hasRole('USER')">Texto Visivel para Usuarios USER.</div>
+        <div sec:authorize="hasRole('ADMIN')">Texto Visivel para Usuarios ADMIN</div>
+        <div sec:authorize="isAuthenticated()"> Texto Visível apenas para usuários autenticados. </div>
+        Nome do Usuario: 
+        <div sec:authentication="name"></div>
+        Authenticated user roles:
+        <div sec:authentication="principal.authorities"></div>
+		
+
+</div>
+<!-- /.container-fluid -->
+</html>

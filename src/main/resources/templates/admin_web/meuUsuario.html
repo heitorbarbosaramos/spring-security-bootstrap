@@ -1,0 +1,212 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/main}">
+
+<div layout:fragment="content" class="container-fluid">
+<meta charset="UTF-8">
+	<!-- Page Heading -->
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+		<h1 class="h3 mb-0 text-gray-800">Meu Usuario</h1>
+		
+		
+	</div>
+	
+	<div class="col-xl-12 col-lg-12">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div
+					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary"> Meu Usuario</h6>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body">
+					<div>
+						
+				<span th:if="${usuarioDadosDTO} != null">
+				
+				<span th:each="usuarioDadosDTO : ${usuarioDadosDTO}">
+				
+					<form id="form-update-meuUsuario">
+						<div class="col-lg-12 mb-4">	
+							<div class="card text-black">
+								<div class="card-body">
+									
+									<div class="row">
+										<div class="form-group col-lg-3">
+											<label for="exampleInputPassword1">ID </label>
+											<input type="text" name="id"  th:value="${usuarioDadosDTO.id}" class="form-control" id="id" placeholder="ID" disabled="disabled">
+											<input type="hidden" id="id" th:value="${usuarioDadosDTO.id}" />
+										</div>
+										
+										
+										<div class="form-group col-lg-4">
+											<label for="exampleInputPassword1">Nome do usuario</label>
+											<input type="text" name="username"  th:value="${usuarioDadosDTO.username}" class="form-control" id="username" placeholder="Nome Usuario" disabled="disabled">
+											<input type="hidden" id="username" th:value="${usuarioDadosDTO.username}" />
+										</div>
+									
+									
+																		<div class="form-group col-lg-5">
+																			<label for="username">Senha</label>
+																			<input type="password" name="password"   class="form-control" id="password" placeholder="Senha">
+																			
+																		</div>
+									</div>
+									
+									<div class="form-group">
+										<label for="exampleInputEmail1">Nome Completo</label>
+										<input type="text" name="nomeCompleto" class="form-control" th:value="${usuarioDadosDTO.nomeCompleto}" id="nomeCompleto" placeholder="Nome Completo">
+										
+									</div>
+									
+									
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-lg-12 mb-4">	
+							<div class="card text-black">
+								<div class="card-body">
+									<div class="text-black-50 small">Contatos</div>
+										<span th:each="usuarioDadosDTOContato : ${usuarioDadosDTO.contatos}">
+											
+											<div class="form-group">
+												<small class="form-text text-muted">Email</small>
+												<input type="email" name="email" class="form-control" th:value="${usuarioDadosDTOContato.email}" id="email" placeholder="Email">
+												<small id="emailHelp" class="form-text text-muted">Nunca vamos compartilhar seu email, com ninguém.</small>
+											</div>
+											
+											<div class="row">
+												<div class="form-group col-lg-4">
+													<small class="form-text text-muted">Telefone</small>
+													<input type="phone" name="telefone" class="form-control" th:value="${usuarioDadosDTOContato.telefone}" id="telefone" placeholder="Telefone">
+												</div>
+												
+												<div class="form-group col-lg-4">
+													<small class="form-text text-muted">Celular</small>
+													<input type="text" name="celular" class="form-control" th:value="${usuarioDadosDTOContato.celular}" id="celular" placeholder="Celular">
+												</div>
+											</div>
+										
+										</span>
+									
+								</div>
+							</div>
+						</div>
+									
+												
+					<div class="row">
+						<div class="col-lg-3 mb-4">	
+							<div class="card text-black">
+								<div id="nomeRole"  class="card-body">
+									<div class="text-black-50 small">Nivel de acesso</div>
+																			
+											
+											<div sec:authorize="hasRole('ADMIN')">
+												<ul>												
+													<li th:each="roles : ${roleDto}">
+														<span th:if="${roles.ativo == 1}">
+															<input type="checkbox" th:name="${roles.nomeRole}"  th:id="${roles.nomeRole}"  th:value="${roles.nomeRole}" autocomplete="off" checked="checked"> <span th:text="${roles.nomeRole}"></span>
+														</span>
+														<span th:if="${roles.ativo == 0}">
+															<input type="checkbox" th:name="${roles.nomeRole}"  th:id="${roles.nomeRole}"  th:value="${roles.nomeRole}" autocomplete="off" > <span th:text="${roles.nomeRole}"></span>
+														</span>
+														
+													</li>											
+												</ul>
+											</div>
+											
+											<ul>
+												<li th:each="roleDtoNormal : ${roleDtoNormal}">
+													<input type="checkbox" th:name="${roleDtoNormal}"  th:id="${roleDtoNormal}"  th:value="${roleDtoNormal}" autocomplete="off" checked="checked" disabled="disabled"> <span th:text="${roleDtoNormal}"></span>
+												</li>
+											</ul>
+									<!--  
+									<ul>				
+										<li th:each="usuarioDadosDTORoles : ${descricaoRoles}" th:text="${usuarioDadosDTORoles}">Roles Usuario</li>
+									</ul>
+									-->
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-lg-9 mb-4">	
+							<div class="card text-black">
+								<div class="card-body">
+									<div class="text-black-50 small">Endereco</div>
+									
+									<span th:each="usuarioDadosDTOEndereco : ${usuarioDadosDTO.enderecos}">
+										<div class="form-group">
+											<small class="form-text text-muted">Logradouro</small>
+											<input type="text" name="logradouro" class="form-control" th:value="${usuarioDadosDTOEndereco.logradouro}" id="logradouro" placeholder="Logradouro" disabled="disabled">
+										</div>
+										
+										<div class="row">
+											<div class="form-group col-lg-2">
+												<small class="form-text text-muted">Nº</small>
+												<input type="text" name="numero" class="form-control" th:value="${usuarioDadosDTOEndereco.numero}" id="numero" placeholder="Numero">
+											</div>
+											<div class="form-group col-lg-3">
+												<small class="form-text text-muted"> Complemento</small>
+												<input type="text" name="complemento" class="form-control" th:value="${usuarioDadosDTOEndereco.complemento}" id="complemento" placeholder="Complemento">
+											</div>
+											<div class="form-group col-lg-7">
+												<small class="form-text text-muted"> Bairro</small>
+												<input type="text" name="bairro" class="form-control" th:value="${usuarioDadosDTOEndereco.bairro}" id="bairro" placeholder="bairro" disabled="disabled">
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="form-group col-lg-7">
+												<small class="form-text text-muted">Localidade</small>
+												<input type="text" name="localidade" class="form-control" th:value="${usuarioDadosDTOEndereco.localidade}" id="localidade" placeholder="Localidade" disabled="disabled">
+											</div>
+											<div class="form-group col-lg-2">
+												<small class="form-text text-muted"> UF</small>
+												<input type="text" name="uf" class="form-control" th:value="${usuarioDadosDTOEndereco.uf}" id="uf" placeholder="UF" disabled="disabled">
+											</div>
+											<div class="form-group col-lg-3">
+												<small class="form-text text-muted"> CEP</small>
+												<input type="text" name="cep" class="form-control" th:value="${usuarioDadosDTOEndereco.cep}" id="cep" placeholder="CEP">
+											</div>
+										</div>
+									
+									</span>
+									
+									
+								</div>
+							</div>
+						</div>
+					</div>
+						
+				<div class="row">	
+					<div class="panel-body buttons-widget col-lg-3">
+						<button class="btn btn-primary" id="botaoEnviar" type="submit">
+						  <span id="submeter" role="status" aria-hidden="true"></span>
+						 	 <i class="fas fa-user-check"></i> Atualizar
+						</button>
+					</div>
+					<div class="panel-body buttons-widget col-lg-5">
+						<div class="alert alert-warning" id="mensagem" role="alert">
+  							  Mensagem
+						</div>
+					</div>
+					
+				</div>
+				
+					
+					</form>
+				</span>
+				
+				</span>
+				
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+
+</div>
+<!-- /.container-fluid -->
+</html>

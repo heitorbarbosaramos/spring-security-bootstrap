@@ -1,0 +1,259 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/main}">
+
+<div layout:fragment="content" class="container-fluid">
+
+	<!-- Page Heading -->
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+		<h1 class="h3 mb-0 text-gray-800">Central Usuario</h1>
+		
+		
+	</div>
+	
+	<div class="col-xl-12 col-lg-12">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div
+					class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary"> Central Usuario</h6>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body">
+
+					
+						<div class="col-lg-12 mb-4">	
+							<div class="card text-black">
+								<div class="card-body">
+								
+						
+									<p>
+									<a class="btn btn-primary" data-toggle="collapse" href="#novoUsuario" role="button" aria-expanded="false" aria-controls="collapseExample">
+										<i class="fas fa-user-plus"></i> Adcionar Novo Usuario
+									</a>
+								
+									</p>
+										<div class="collapse" id="novoUsuario">
+											<div>
+											
+											<!-- FORMULARIO NOVO USUARIO-->
+											<form id="form-new-usuario" autocomplete="off">
+														<div class="col-lg-12 mb-4">	
+															<div>
+																<div>
+																	
+																	<div class="row">
+																		<div class="form-group col-lg-3">
+																			<label for="id">ID </label>
+																			<input type="text" name="id" class="form-control" id="id" placeholder="ID" disabled="disabled">											
+																		</div>
+																		
+																		
+																		<div class="form-group col-lg-4">
+																			<label for="username">Nome do usuario</label>
+																			<input type="text" name="username"  class="form-control" id="username" placeholder="Nome Usuario" required="required" disabled="disabled">
+																			
+																		</div>
+																		
+																		
+																		<div class="form-group col-lg-4">
+																			<label for="username">Senha</label>
+																			<input type="password" name="password"  class="form-control" id="password" placeholder="Senha" required="required">
+																			
+																		</div>
+																	</div>
+																	
+																	<div class="form-group">
+																		<label for="nomeCompleto">Nome Completo</label>
+																		<input type="text" name="nomeCompleto" class="form-control" id="nomeCompleto" placeholder="Nome Completo">
+																		
+																	</div>
+																	
+																	
+																</div>
+															</div>
+														</div>
+														
+														<div class="col-lg-12 mb-4">	
+															<div>
+																<div>
+																	<div class="text-black-50 small">Contatos</div>
+																		
+																			
+																			<div class="form-group">
+																				<small class="form-text text-muted">Email</small>
+																				<input type="email" name="email" class="form-control"  id="email" placeholder="Email">
+																				<small id="emailHelp" class="form-text text-muted">Nunca vamos compartilhar seu email, com ninguém.</small>
+																			</div>
+																			
+																			<div class="row">
+																				<div class="form-group col-lg-4">
+																					<small class="form-text text-muted">Telefone</small>
+																					<input type="phone" name="telefone" class="form-control" id="telefone" placeholder="Telefone" required="required">
+																				</div>
+																				
+																				<div class="form-group col-lg-4">
+																					<small class="form-text text-muted">Celular</small>
+																					<input type="text" name="celular" class="form-control" id="celular" placeholder="Celular">
+																				</div>
+																			</div>
+																		
+																	
+																</div>
+															</div>
+														</div>
+																	
+																				
+														<div class="row">
+															<div class="col-lg-3 mb-4">	
+																<div class="card text-black">
+																	<div id="nomeRole" class="card-body">
+																		<div class="text-black-50 small">Nivel de acesso</div>
+																			<input type="hidden" id="roles" th:value="${listRoles}" />
+																			<span th:each="rolesUser : ${listRoles}">
+																				<label class="btn btn-default">
+																					<input type="checkbox" th:name="${rolesUser}"  th:id="${rolesUser}" autocomplete="off"> <span th:text="${rolesUser}"></span>
+																				</label>
+																			</span>
+																			
+	
+																			
+																		
+																	</div>
+																</div>
+															</div>
+															
+															<div class="col-lg-9 mb-4">	
+																<div>
+																	<div>
+																		<div class="text-black-50 small" id="statusEndereco">Endereço</div>
+																			
+																			<div class="form-group">
+																				<small class="form-text text-muted">Logradouro</small>
+																				<input type="text" name="logradouro" class="form-control" id="logradouro" placeholder="Logradouro" disabled="disabled">
+																			</div>
+																			
+																			<div class="row">
+																				
+																				<div class="form-group col-lg-2">
+																					<small class="form-text text-muted">Nº</small>
+																					<input type="text" name="numero" class="form-control" id="numero" placeholder="Numero">
+																				</div>
+																				
+																				<div class="form-group col-lg-3">
+																					<small class="form-text text-muted"> Complemento</small>
+																					<input type="text" name="complemento" class="form-control" id="complemento" placeholder="Complemento">
+																				</div>
+																				
+																				<div class="form-group col-lg-7">
+																					<small class="form-text text-muted"> Bairro</small>
+																					<input type="text" name="bairro" class="form-control"  id="bairro" placeholder="bairro" disabled="disabled">
+																				</div>
+																				
+																			</div>
+																			
+																			<div class="row">
+																				
+																				<div class="form-group col-lg-7">
+																					<small class="form-text text-muted">Localidade</small>
+																					<input type="text" name="localidade" class="form-control" id="localidade" placeholder="Localidade" disabled="disabled">
+																				</div>
+																				
+																				<div class="form-group col-lg-2">
+																					<small class="form-text text-muted"> UF</small>
+																					<input type="text" name="uf" class="form-control" id="uf" placeholder="UF" disabled="disabled">
+																				</div>
+																				
+																				<div class="form-group col-lg-3">
+																					<small class="form-text text-muted"> CEP</small>
+																					<input type="text" name="cep" class="form-control"  id="cep" placeholder="CEP">
+																				</div>
+																				
+																			</div>
+																			<input type="hidden" name="unidade" class="form-control"  id="unidade">
+																			<input type="hidden" name="ibge" class="form-control"  id="ibge">
+																			<input type="hidden" name="gia" class="form-control"  id="gia">
+																	
+																	</div>
+																</div>
+															</div>
+														</div>
+														
+												<div class="row">	
+													<div class="col-lg-3 mb-4">	
+														<button class="btn btn-primary" id="botaoSalvar" type="submit">
+														  <span id="submeter" role="status" aria-hidden="true"></span>
+														  <i class="fas fa-user-plus"></i> Salvar
+														</button>
+													</div>
+													<div class="col-lg-9 mb-4">	
+														<div class="alert alert-warning col-lg-5" id="mensagem" role="alert">
+															Mensagem
+														</div>
+													</div>
+													
+												</div>
+											</form>
+											<!-- FORMULARIO NOVO USUARIO-->
+				
+											
+											</div>
+										</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-lg-12 mb-4">	
+							<div class="card text-black">
+								<div class="card-body">
+						
+										<small class="form-text text-muted">Todos os Usuarios</small>
+										<table id="tabela" class="display" style="width:100%">
+											<thead>
+												<tr>
+													<th>Nome</th>
+													<th>Usuario</th>
+													<th>Email</th>
+													<th>Telefone</th>
+													<th>Celular</th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+												
+													<tr th:each="usuariosDTO : ${usuariosDTO}">
+														<td th:text="${usuariosDTO.nomeCompleto}"></td>
+														<td th:text="${usuariosDTO.username}"></td>
+														<span th:each="usuariosDTOcontatos : ${usuariosDTO.contatos}">
+														<td th:text="${usuariosDTOcontatos.email}"></td>
+														<td th:text="${usuariosDTOcontatos.telefone}"></td>
+														<td th:text="${usuariosDTOcontatos.celular}"></td>
+														</span>
+														<td>												
+															<form method="post" action="/usuario/meuUsuario">
+																<input type="hidden" name="nomeUsuario" th:value="${usuariosDTO.username}">
+																<button class="btn btn-success"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> </button>												
+															</form>											
+														</td>
+													</tr>
+												
+											</tbody>							
+										</table>
+										
+								</div>
+							</div>
+						</div>
+						
+						
+						
+					
+				</div>
+			</div>
+		</div>
+
+		
+
+</div>
+<!-- /.container-fluid -->
+
+</html>
